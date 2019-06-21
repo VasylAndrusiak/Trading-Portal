@@ -1,0 +1,24 @@
+<div class="col-lg-3">
+    <h2>Меню</h2>
+    <ul class="list-group">
+        <li class="list-group-item"><strong>Продукти</strong></li>
+        {{#ifCond session.isAdmin '===' true}}
+        <li class="list-group-item"><i class="fa fa-plus-square-o fa-icon" aria-hidden="true"></i> &nbsp; <a href="/admin/product/new">Новий</a></li>
+        {{/ifCond}}
+        <li class="list-group-item"><i class="fa fa-list fa-icon" aria-hidden="true"></i> &nbsp; <a href="/admin/products">Список</a></li>
+        <li class="list-group-item"><strong>Замовлення</strong></li>
+        <li class="list-group-item"><i class="fa fa-cube fa-icon" aria-hidden="true"></i> &nbsp; <a href="/admin/orders">Список</a></li>
+        <li class="list-group-item"><strong>Клієнти</strong></li>
+        <li class="list-group-item"><i class="fa fa-users fa-icon" aria-hidden="true"></i> &nbsp; <a href="/admin/customers">Список</a></li>
+        <li class="list-group-item"><strong>Користувачі</strong></li>
+        {{#ifCond session.isAdmin '===' true}}
+        <li class="list-group-item"><i class="fa fa-user-plus fa-icon" aria-hidden="true"></i> &nbsp; <a href="/admin/user/new">Новий</a></li>
+        <li class="list-group-item"><i class="fa fa-user fa-icon" aria-hidden="true"></i> &nbsp; <a href="/admin/users">Редагувати</a></li>
+        {{/ifCond}}
+        <li class="list-group-item"><i class="fa fa-user-circle-o fa-icon" aria-hidden="true"></i> &nbsp; <a href="/admin/user/edit/{{session.userId}}">Мій аккаунт</a></li>
+        <li class="list-group-item"><strong>Налаштування</strong></li>
+        <li class="list-group-item"><i class="fa fa-cog fa-icon" aria-hidden="true"></i> &nbsp; <a href="/admin/settings">Загальні налаштування</a></li>
+        <li class="list-group-item"><i class="fa fa-bars fa-icon" aria-hidden="true"></i> &nbsp; <a href="/admin/settings/menu">Меню</a></li>
+        <li class="list-group-item"><i class="fa fa-file-o fa-icon" aria-hidden="true"></i> &nbsp; <a href="/admin/settings/pages">Статичні сторінки</a></li>
+    </ul>
+</div>

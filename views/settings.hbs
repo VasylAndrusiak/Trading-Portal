@@ -1,0 +1,158 @@
+{{> partials/menu}}
+<div class="col-lg-9">
+    <div class="row">
+        <div class="col-md-10">
+            <form method="post" id="settingsForm" action="/admin/settings/update" data-toggle="validator">
+                <h2 class="clearfix">General Settings
+                    <div class="pull-right">
+                    <button type="submit" id="btnSettingsUpdate" class="btn btn-success">Update</button>
+                </h2>
+                <div class="form-group">
+                    <label>Назва кошика *</label>
+                    <input type="text" class="form-control" name="cartTitle" value="{{config.cartTitle}}" required>
+                    <p class="help-block">
+                        Цей елемент є критичним для пошукової оптимізації. Заголовок кошика відображається, якщо ваш логотип приховано.
+                    </p>
+                </div>
+                <div class="form-group">
+                    <label>Опис кошика *</label>
+                    <input type="text" class="form-control" name="cartDescription" value="{{config.cartDescription}}" required>
+                    <p class="help-block">Цей опис показує, коли ваш веб-сайт зазначено в результатах пошуку.</p>
+                </div>
+                <div class="form-group">
+                    <label>Кошик зображення / логотип</label>
+                    <input type="text" class="form-control" name="cartLogo" value="{{config.cartLogo}}">
+                </div>
+                <div class="form-group">
+                    <label>URL кошика *</label>
+                    <input type="text" class="form-control" name="baseUrl" value="{{config.baseUrl}}" required>
+                    <p class="help-block">This URL is used in sitemaps and when your customer returns from completing their payment.</p>
+                </div>
+                <div class="form-group">
+                    <label>Кошик електронної пошти *</label>
+                    <input type="email" class="form-control" name="emailAddress" value="{{config.emailAddress}}" required>
+                    <p class="help-block">Це використовується як електронний лист "від" при відправленні квитанцій клієнтам.</p>
+                </div>
+                <div class="form-group">
+                    <label>Плоский тариф доставки *</label>
+                    <input type="text" class="form-control" name="flatShipping" value="{{config.flatShipping}}" required>
+                    <p class="help-block">До всіх замовлень застосовується плавна ставка доставки.</p>
+                </div>
+                <div class="form-group">
+                    <label>Порогова сума безкоштовної доставки</label>
+                    <input type="text" class="form-control" name="freeShippingAmount" value="{{config.freeShippingAmount}}">
+                    <p class="help-block">
+                        Замовлення, що перевищують це значення, означатимуть, що відвантажене буде безкоштовним. Встановіть високе значення, якщо ви завжди бажаєте зарядити доставку.</p>
+                </div>
+                <div class="form-group">
+                    <label>Платіжний шлюз</label>
+                    <select class="form-control" name="paymentGateway">
+                        <option {{selectState 'paypal' config.paymentGateway}} value="paypal">Paypal</option>
+                        <option {{selectState 'stripe' config.paymentGateway}} value="stripe">Stripe</option>
+                    </select>
+                    <p class="help-block">Також потрібно налаштувати облікові дані платіжного шлюзу в `/config/&lt;gateway_name&gt;.json`
+                        file.</p>
+                </div>
+                <div class="form-group">
+                    <label>Символ грошової одиниці</label>
+                    <input type="text" class="form-control" name="currencySymbol" value="{{currencySymbol config.currencySymbol}}">
+                    <p class="help-block">Встановіть цей символ на валюту. Наприклад: $, £, €</p>
+                </div>
+                <div class="form-group">
+                    <label>Тема</label>
+                    <select class="form-control" name="theme">
+                        {{#each themes}}
+                        <option {{selectState this ../config.theme}} value="{{this}}">{{this}}</option>
+                        {{/each}}
+                    </select>
+                    <p class="help-block">Теми завантажуються з `/public/themes/`</p>
+                </div>
+                <div class="form-group">
+                    <label>Продукція в рядку</label>
+                    <select class="form-control" name="productsPerRow">
+                        <option value="{{config.productsPerRow}}" hidden="hidden" selected="selected">{{config.productsPerRow}}</option>
+                        <option {{selectState '1' config.productsPerRow}}>1</option>
+                        <option {{selectState '2' config.productsPerRow}}>2</option>
+                        <option {{selectState '3' config.productsPerRow}}>3</option>
+                        <option {{selectState '4' config.productsPerRow}}>4</option>
+                    </select>
+                    <p class="help-block">Кількість продуктів для відображення на сторінці.</p>
+                </div>
+                <div class="form-group">
+                    <label>Продукти на сторінці</label>
+                    <input type="number" class="form-control" name="productsPerPage" value="{{config.productsPerPage}}">
+                    <p class="help-block">Кількість продуктів для відображення на кожній сторінці.</p>
+                </div>
+                <div class="form-group">
+                    <label>Меню Ввімкнено: </label>
+                    <div class="checkbox">
+                        <label>
+                            <input class="settingsMenuEnabled" type="checkbox" {{checkedState config.menuEnabled}} id="menuEnabled"
+                                name="menuEnabled">
+                        </label>
+                    </div>
+                    <p class="help-block">Якщо встановлено меню, ви можете налаштувати його
+                        <a href="/admin/settings/menu">here</a>.</p>
+                </div>
+                <div class="form-group">
+                    <label>Заголовок меню</label>
+                    <input type="text" class="form-control" name="menuTitle" value="{{config.menuTitle}}" placeholder="Menu">
+                    <p class="help-block">Текст заголовка для вашого меню.</p>
+                </div>
+                <div class="form-group">
+                    <label>Розташування меню: </label>
+                    <select class="form-control" name="menuLocation">
+                        <option {{selectState 'top' config.menuLocation}}>top</option>
+                        <option {{selectState 'side' config.menuLocation}}>side</option>
+                    </select>
+                    <p class="help-block">Розташування вашого меню.</p>
+                </div>
+                <div class="form-group">
+                    <label>Footer HTML</label>
+                    <textarea class="form-control codemirrorArea" rows="5" id="footerHtml" name="footerHtml">{{footerHtml}}</textarea>
+                    <input type="hidden" id="footerHtml_input" name="footerHtml_input">
+                </div>
+                <div class="form-group">
+                    <label>Google analytics</label>
+                    <textarea class="form-control" rows="3" id="googleAnalytics" name="googleAnalytics">{{googleAnalytics}}</textarea>
+                    <input type="hidden" id="googleAnalytics_input" name="googleAnalytics_input">
+                    <p class="help-block">Ваш код Google Analytics. Також вкажіть теги "script" -
+                        <a href="https://support.google.com/analytics/answer/1032385?hl=en"
+                            target="_blank">Довідка</a>
+                    </p>
+                </div>
+                <div class="form-group">
+                    <label>Спеціальний CSS</label>
+                    <textarea class="form-control" rows="10" id="customCss" name="customCss">{{config.customCss}}</textarea>
+                    <input type="hidden" id="customCss_input" name="customCss_input">
+                </div>
+                <div class="form-group">
+                    <label>Email SMTP Host</label>
+                    <input type="text" class="form-control" name="emailHost" value="{{config.emailHost}}" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <label>Email SMTP Port</label>
+                    <input type="text" class="form-control" name="emailPort" value="{{config.emailPort}}" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <label>Email SMTP secure </label>
+                    <div class="checkbox">
+                        <label>
+                            <input class="settingsMenuEnabled" type="checkbox" {{checkedState config.emailSecure}} name="emailSecure">
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Email SMTP Username</label>
+                    <input type="text" class="form-control" name="emailUser" value="{{config.emailUser}}" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <label>Email SMTP Password</label>
+                    <input type="password" class="form-control" name="emailPassword" value="{{config.emailPassword}}" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <button id="sendTestEmail" class="btn btn-success">Надішліть тестову електронну пошту</button>
+                </div>
+                </div>
+        </div>
+    </div>

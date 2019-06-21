@@ -1,0 +1,42 @@
+{{> partials/menu}}
+<div class="col-lg-9">
+	<div class="row">
+		<div class="col-md-12">
+            <form id="settingsPageEditor">
+                <h2 class="clearfix">Статична сторінка <div class="pull-right"><button type="submit" id="btnPageUpdate" class="btn btn-success">{{button_text}}</button></div></h2>
+                <input type="hidden" id="page_id" value="{{page._id}}">
+                <div class="form-group">
+                    <label>Назва сторінки *</label>
+                    <input type="text" class="form-control" id="pageName" name="pageName" value="{{page.pageName}}" required>
+                    <p class="help-block">Дружнє ім'я для керування статичною сторінкою.</p>
+                </div>
+                <div class="form-group">
+                    <label>Сторінка сліз *</label>
+                    <input type="text" class="form-control" id="pageSlug" name="pageSlug" value="{{page.pageSlug}}" required>
+                    <p class="help-block">Це відносна URL-адреса сторінки. Наприклад: параметр "про" зробить сторінку доступною: mydomain.com/about</p>
+                </div>
+                <div class="form-group">
+                    <label>Сторінка ввімкнена: </label>
+                    <div class="checkbox">
+                        <label><input class="settingsPageEnabled" type="checkbox" {{checkedState page.pageEnabled}} id="pageEnabled" name="pageEnabled"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Вміст сторінки *</label>
+                    <textarea id="pageContent">{{page.pageContent}}</textarea>
+                    <p class="help-block">Тут ви можете ввести вміст, який ви хочете відобразити на вашій статичній сторінці.</p>
+                </div>
+            </form>
+		</div>
+	</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
+<script>
+    $(document).ready(function() {
+        $('#pageContent').summernote({
+            height: 300,
+            minHeight: null
+        });
+    });
+</script>

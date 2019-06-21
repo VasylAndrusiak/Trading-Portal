@@ -1,0 +1,49 @@
+{{> partials/menu}}
+<div class="col-lg-9">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>Customer</h2>
+        </div>
+        <div class="col-xs-12 col-md-12">
+            <table class="table-bordered">
+                <tr>
+                    <td><span class="text-info">Електронна пошта:</span></td>
+                    <td>{{result.email}}</td>
+                </tr>
+                <tr>
+                    <td><span class="text-info">Назва:</span></td>
+                    <td>{{result.firstName}} {{result.lastName}}</td>
+                </tr>
+                <tr>
+                    <td><span class="text-info">Адреса 1:</span></td>
+                    <td>{{result.address1}}</td>
+                </tr>
+                <tr>
+                    <td><span class="text-info">Адреса 2:</span></td>
+                    <td>{{result.address2}}</td>
+                </tr>
+                <tr>
+                    <td><span class="text-info">Країна:</span></td>
+                    <td>{{result.country}}</td>
+                </tr>
+                <tr>
+                    <td><span class="text-info">Держава</span></td>
+                    <td>{{result.state}}</td>
+                </tr>
+                <tr>
+                    <td><span class="text-info">Поштовий індекс:</span></td>
+                    <td>{{result.postcode}}</td>
+                </tr>
+                <tr>
+                    <td><span class="text-info">Номер телефону:</span></td>
+                    <td>{{result.phone}}</td>
+                </tr>
+                <tr>
+                    <td><span class="text-info">Дата створення:</span></td>
+                    <td>{{formatDate result.created "DD/MM/YYYY hh:mmA"}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <input type="hidden" id="productId" value="{{result._id}}">
+</div>

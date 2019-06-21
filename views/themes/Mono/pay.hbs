@@ -1,0 +1,67 @@
+<div class="col xl10 offset-xl1 s12">
+    <div class="row">
+        {{#if paymentMessage}}
+            <p class="text-danger text-center">{{paymentMessage}}</p>
+        {{/if}}
+        <div class="col m4">
+            <div class="card">
+                <div class="card-content">
+                    <div class="row">
+                    <span class="card-title">Customer details</span>
+                    {{#unless session.customer}}
+                    <p>Існуючий клієнт</p>
+                    <div class="input-field col s12">
+                        <input type="email" id="customerLoginEmail" name="loginEmail" minlength="5" placeholder="Email address" required>
+                    </div>
+                    <div class="input-field col s12">
+                        <input type="password" class="form-control" id="customerLoginPassword" name="loginPassword" minlength="5" placeholder="Password" required>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <a href="/customer/forgotten" class="btn waves-effect waves-light black pull-left">
+                            Забули пароль</a>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <button id="customerLogin" class="btn waves-effect waves-light black pull-right" type="submit">Вхід</button>
+                    </div>
+                    {{/unless}}
+                    {{#if session.customer}}
+                    <div class="col s12">
+                        <button id="customerLogout" class="btn waves-effect waves-light black pull-right">Змінити клієнта</button>
+                    </div>
+                    {{/if}}
+                    <form id="shipping-form" class="shipping-form" action="/{{config.paymentGateway}}/checkout_action" method="post" role="form" data-toggle="validator" novalidate="false">
+                        {{> themes/Mono/shipping-form}}
+                        {{#if session.customer}}
+                        {{#ifCond config.paymentGateway '==' 'paypal'}}
+                            {{> payments/paypal}}
+                        {{/ifCond}}
+                        {{/if}}
+                        {{#unless session.customer}}
+                        <div class="col s12">
+                            <p class="text-muted">Введіть пароль, щоб створити обліковий запис для наступного разу</p>
+                            <div class="input-field col s12">
+                                <input type="password" class="form-control customerDetails" id="newCustomerPassword" name="newCustomerPassword" placeholder="Password" required>
+                            </div>
+                        </div>
+                        <div class="col s12">
+                            <a id="createCustomerAccount" class="btn waves-effect waves-light black pull-right">Створити обліковий запис</a>
+                        </div>
+                        {{/unless}}
+                    </form>
+                    {{#if session.customer}}
+                    {{#ifCond config.paymentGateway '==' 'stripe'}}
+                        {{> partials/payments/stripe}}
+                    {{/ifCond}}
+                    {{#ifCond config.paymentGateway '==' 'authorizenet'}}
+                        {{> partials/payments/authorizenet}}
+                    {{/ifCond}}
+                    {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="cart" class="col-md-7 col m7 offset-m1">
+            {{> themes/Mono/cart}}
+        </div>
+    </div>
+</div>
