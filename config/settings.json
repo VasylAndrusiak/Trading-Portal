@@ -25,5 +25,5 @@
     "theme": "Cloth",
     "trackStock": false,
     "env": "",
-    "themeViews": "../views/themes/Mono/"
+    "themeViews": "../views/themes/Cloth/"
 }
