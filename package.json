@@ -7,9 +7,6 @@
     "lib": "lib",
     "test": "test"
   },
-  "engines": {
-    "node": "10.13.0"
-  },
   "dependencies": {
     "ajv": "^6.8.1",
     "async": "^2.6.1",
@@ -21,7 +18,7 @@
     "colors": "^1.3.3",
     "connect-mongodb-session": "^1.4.0",
     "cookie-parser": "^1.4.3",
-    "express": "^4.16.4",
+    "express": "^4.17.1",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.3",
     "glob": "^7.1.3",
@@ -79,5 +76,8 @@
   "bugs": {
     "url": "https://github.com/VasylAndrusiak/Trading-Portal/issues"
   },
-  "homepage": "https://github.com/VasylAndrusiak/Trading-Portal#readme"
+  "homepage": "https://github.com/VasylAndrusiak/Trading-Portal#readme",
+  "keywords": [
+    "heroku"
+  ]
 }
