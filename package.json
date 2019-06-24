@@ -67,7 +67,6 @@
   },
   "scripts": {
     "start": "node app.js",
-    "deploy": "gulp deploy",
     "test": "ava test/**/*.js --verbose"
   },
   "repository": {
