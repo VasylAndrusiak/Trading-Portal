@@ -46,7 +46,7 @@
     "strip-bom": "^3.0.0",
     "stripe": "^5.10.0",
     "uglifycss": "0.0.27",
-    "updates": "^8.1.0"
+    "updates": "^13.2.8"
   },
   "devDependencies": {
     "ava": "^0.25.0",
